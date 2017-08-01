@@ -1,0 +1,162 @@
+$main: #8AC5FF;
+$highlight: #223140;
+$highlight-soft: #45627F;
+$accent: #eee;
+$font-heading: 'Press Start 2P', cursive;
+$font-body: 'Roboto', sans-serif;
+@mixin font($font,$size) {
+  font-family: $font;
+  font-size: $size;
+}
+
+body {
+   font-size: 12px;
+   line-height: 1.5;
+   text-align: center;
+   font-family: $font-body;
+   background-color: $main;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: left;
+
+    .header {
+      display: flex;
+
+
+      .twitch svg {
+        height: 8em;
+      }
+      h1 {
+        // background-color: $main;
+        margin: 0;
+        padding: 1.2em 0;
+        text-align: left;
+        font-family: $font-heading;
+        font-size: 1.8em;
+      }
+    }
+
+     .stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        div {
+           text-align: center;
+           width: 33.3%;
+           cursor: pointer;
+           border-right: 0.1em solid $main;
+           padding: 0.5em 0;
+           background-color: #6794BF;
+           font-weight: 700;
+           font-size: 1em;
+
+           &:last-child {
+              border-right: none;
+           }
+           &:hover {
+              background-color: #223140;
+              color: #fff;
+           }
+        }
+
+        div.active {
+           background-color: #223140;
+           color: #fff;
+        }
+     }
+
+     .results {
+
+        .item {
+          font-size: 1.2em;
+          background-color: #7CB1E5;
+          margin: 0.2em 0;
+          padding: 1em;
+          display: flex;
+          align-items: flex-start;
+
+          > div {
+            // text-align: center;
+          }
+
+          .logo {
+            width: 6em;
+            margin-right: 1em;
+            border-radius: 50%;
+            overflow: hidden;
+
+            flex-shrink: 0;
+
+            img {
+              display: block;
+              max-width: 100%;
+            }
+          }
+
+          .name {
+            a {
+              font-weight: 700;
+              text-decoration: none;
+              color: $highlight;
+
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+          .name.live {
+            &::after {
+              font-family: FontAwesome;
+              content:'\f111';
+              display: inline-block;
+              margin-left: 0.5em;
+              color: red;
+            }
+          }
+          .name.live {
+            &::after {
+              animation: blink 3s infinite;
+            }
+          }
+
+
+          .desc {
+            word-break: break-all;
+            color: $highlight-soft;
+          }
+        }
+     }
+
+} /* .container */
+
+@keyframes blink {
+  0% {opacity: 1;}
+  // 25% {opacity: 0;}
+  50% {opacity: 1;}
+  75% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@media screen and (min-width: 426px) {
+  body {
+    font-size: 16px;
+  }
+
+  .container {
+    h1 {
+      text-align: center;
+    }
+  }
+}
+@media screen and (min-width: 769px) {
+  body {
+    font-size: 16px;
+  }
+  .container {
+    max-width: 45em;
+  }
+}

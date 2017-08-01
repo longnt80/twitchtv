@@ -1,0 +1,98 @@
+body {
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  background-color: #8AC5FF; }
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: left; }
+  .container .header {
+    display: flex; }
+    .container .header .twitch svg {
+      height: 8em; }
+    .container .header h1 {
+      margin: 0;
+      padding: 1.2em 0;
+      text-align: left;
+      font-family: "Press Start 2P", cursive;
+      font-size: 1.8em; }
+  .container .stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; }
+    .container .stats div {
+      text-align: center;
+      width: 33.3%;
+      cursor: pointer;
+      border-right: 0.1em solid #8AC5FF;
+      padding: 0.5em 0;
+      background-color: #6794BF;
+      font-weight: 700;
+      font-size: 1em; }
+      .container .stats div:last-child {
+        border-right: none; }
+      .container .stats div:hover {
+        background-color: #223140;
+        color: #fff; }
+    .container .stats div.active {
+      background-color: #223140;
+      color: #fff; }
+  .container .results .item {
+    font-size: 1.2em;
+    background-color: #7CB1E5;
+    margin: 0.2em 0;
+    padding: 1em;
+    display: flex;
+    align-items: flex-start; }
+    .container .results .item .logo {
+      width: 6em;
+      margin-right: 1em;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0; }
+      .container .results .item .logo img {
+        display: block;
+        max-width: 100%; }
+    .container .results .item .name a {
+      font-weight: 700;
+      text-decoration: none;
+      color: #223140; }
+      .container .results .item .name a:hover {
+        text-decoration: underline; }
+    .container .results .item .name.live::after {
+      font-family: FontAwesome;
+      content: '\f111';
+      display: inline-block;
+      margin-left: 0.5em;
+      color: red; }
+    .container .results .item .name.live::after {
+      animation: blink 3s infinite; }
+    .container .results .item .desc {
+      word-break: break-all;
+      color: #45627F; }
+
+/* .container */
+@keyframes blink {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 1; }
+  75% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@media screen and (min-width: 426px) {
+  body {
+    font-size: 16px; }
+  .container h1 {
+    text-align: center; } }
+
+@media screen and (min-width: 769px) {
+  body {
+    font-size: 16px; }
+  .container {
+    max-width: 45em; } }
