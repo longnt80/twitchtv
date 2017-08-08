@@ -118,7 +118,6 @@ $('document').ready(function(){
       $('.item.off').css('display','none');
     }
     else {return;}
-
   });
 
   offlineBtn.on('click',function(){
@@ -128,14 +127,7 @@ $('document').ready(function(){
       $('.item.on').css('display','none');
     }
     else {return;}
-
   });
 
 
 });
-
-
-
-
-
-// loadAPI(index+1);
