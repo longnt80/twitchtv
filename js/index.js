@@ -4,7 +4,7 @@
 var users = [
   "showashidden",
   "freecodecamp",
-  "xposedlive",
+  "quirkydev",
   "drdisrespectlive",
   "grimmmz",
   "c9sneaky",
