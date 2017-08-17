@@ -18,79 +18,63 @@ var allBtn = $('.all');
 var onlineBtn = $('.online');
 var offlineBtn = $('.offline');
 
-function loadAPI(index) {
+function loadAPI(username) {
     var status, name, logo, theURL;
 
-    index = index || 0;
+    $.getJSON('https://wind-bow.glitch.me/twitch-api/streams/' + username, function(data){
+      // console.log(data);
+      var statusDisplay = $('.desc');
 
-    if (index == users.length) {
-      return;
-    }
-    else {
-      var user = users[index];
-      $.getJSON('https://wind-bow.glitch.me/twitch-api/streams/' + user, function(data){
-        console.log(data);
-        var statusDisplay = $('.desc');
-        console.log( index );
-        if (data["stream"] != null) {
-          // console.log(data["stream"]["channel"]["status"]);
-          status = data["stream"]["channel"]["status"];
+      if (data["stream"] != null) {
+        // console.log(data["stream"]["channel"]["status"]);
+        status = data["stream"]["channel"]["status"];
+      }
+      else {
+        status = "Offline";
+      }
+
+      // console.log(status);
+      statusDisplay.html(status);
+      $.getJSON('https://wind-bow.glitch.me/twitch-api/channels/' + username, function(data){
+        // console.log( username );
+
+        logo = data["logo"];
+        name = data["display_name"];
+        theURL = data["url"];
+
+        // console.log(status);
+        // console.log( username,name,theURL );
+        if (status == "Offline") {
+          result.append(
+            '<div class="item off">' +
+            '<div class="logo"><img src="' + logo + '" alt=""></div>' +
+            '<div class="info">' +
+            '<div class="name"><a target="_blank" href="' + theURL + '">' + name + '</a></div>' +
+            '<div class="desc">' + status + '</div>' +
+            '</div>' +
+            '</div>'
+          );
         }
-        else {
-          status = "Offline";
+        else if (status != "Offline") {
+          result.prepend(
+            '<div class="item on">' +
+            '<div class="logo"><img src="' + logo + '" alt=""></div>' +
+            '<div class="info">' +
+            '<div class="name live"><a target="_blank" href="' + theURL + '">' + name + '</a></div>' +
+            '<div class="desc">' + status + '</div>' +
+            '</div>' +
+            '</div>'
+          );
         }
 
-        console.log(status);
-        statusDisplay.html(status);
-      })
-      .done(function() {
-        $.getJSON('https://wind-bow.glitch.me/twitch-api/channels/' + user, function(data){
-          console.log( index );
-          // console.log( JSON.stringify(data) );
-
-          logo = data["logo"];
-          name = data["display_name"];
-          theURL = data["url"];
-
-          console.log(status);
-          console.log( user,name,theURL );
-
-        })
-        .done(function() {
-          if (status == "Offline") {
-            result.append(
-              '<div class="item off">' +
-              '<div class="logo"><img src="' + logo + '" alt=""></div>' +
-              '<div class="info">' +
-              '<div class="name"><a target="_blank" href="' + theURL + '">' + name + '</a></div>' +
-              '<div class="desc">' + status + '</div>' +
-              '</div>' +
-              '</div>'
-            );
-          }
-          else if (status != "Offline") {
-            result.prepend(
-              '<div class="item on">' +
-              '<div class="logo"><img src="' + logo + '" alt=""></div>' +
-              '<div class="info">' +
-              '<div class="name live"><a target="_blank" href="' + theURL + '">' + name + '</a></div>' +
-              '<div class="desc">' + status + '</div>' +
-              '</div>' +
-              '</div>'
-            );
-          }
-
-          allBtn.addClass('active');
-          mouseClickable = 1;
-        });
-
-      })
-      .fail(function() {
-        console.log( "error" );
+        allBtn.addClass('active');
+        mouseClickable = 1;
       });
 
-
-    }
+    })
+    .fail(function() {
+      console.log( "error" );
+    });
 
 }
 
@@ -98,8 +82,8 @@ function loadAPI(index) {
 
 $('document').ready(function(){
 
-  users.forEach(function(item, i){
-    loadAPI(i);
+  users.forEach(function(username){
+    loadAPI(username);
   });
 
   allBtn.on('click',function(){
