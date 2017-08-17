@@ -22,28 +22,21 @@ function loadAPI(username) {
     var status, name, logo, theURL;
 
     $.getJSON('https://wind-bow.glitch.me/twitch-api/streams/' + username, function(data){
-      // console.log(data);
       var statusDisplay = $('.desc');
 
       if (data["stream"] != null) {
-        // console.log(data["stream"]["channel"]["status"]);
         status = data["stream"]["channel"]["status"];
       }
       else {
         status = "Offline";
       }
 
-      // console.log(status);
       statusDisplay.html(status);
       $.getJSON('https://wind-bow.glitch.me/twitch-api/channels/' + username, function(data){
-        // console.log( username );
-
         logo = data["logo"];
         name = data["display_name"];
         theURL = data["url"];
 
-        // console.log(status);
-        // console.log( username,name,theURL );
         if (status == "Offline") {
           result.append(
             '<div class="item off">' +
@@ -112,6 +105,4 @@ $('document').ready(function(){
     }
     else {return;}
   });
-
-
 });
